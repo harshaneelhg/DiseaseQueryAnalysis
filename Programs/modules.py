@@ -4,7 +4,10 @@ import numpy as np
 import scipy.sparse
 from sklearn.preprocessing import normalize
 
-def get_ranks(W, q, c):
+__all__ = ['get_rwr_ranks', 'get_k_best']
+
+
+def get_rwr_ranks(W, q, c):
 	"""
 		Input:
 		W: Sparse adjecency matrix.
@@ -36,3 +39,29 @@ def get_ranks(W, q, c):
 		i= i+1
 
 	return r1,i
+
+def get_k_best(a,k):
+	"""
+	Input:
+		a: Array conttaining values,
+		k: number of best values you want to find out.
+
+	Output:
+		k_best : array containing k best elements  from a. (|k_best| = k)
+
+	Example:
+		get_k_best([2,6,1,4,9,12,10], 3) = [2,1,4].
+	"""
+	k_best = list([(a[i],i) for i in range(0,k)])
+	min_a = min(k_best,key=lambda item:item[0])
+	max_a =max(k_best,key=lambda item:item[0])
+	print max_a[0]
+	for i in range(k,len(a)):
+		if a[i]>max_a[0]:
+			
+			k_best = [(v,idx) for v,idx in k_best if v != min_a[0]]
+			k_best.append((a[i],i))
+			max_a = (a[i],i)
+			min_a = min(k_best,key=lambda item:item[0])
+
+	return k_best
