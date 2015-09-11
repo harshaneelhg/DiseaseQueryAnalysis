@@ -1,0 +1,58 @@
+html, body{
+	font-family:  "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	background-color: #B2CCFF;
+    height: 100%;
+}
+body h1{
+	background-color: #B2CCFF;
+}
+#container_1{
+	height: 50%;
+	padding: 2%;
+	background-color: #5C85FF;
+}
+#container_2{
+	background-color: #B2CCFF;
+}
+#container_2 h3{
+	background-color: #B2CCFF;
+	text-align: center;
+}
+#container_2 h4{
+	text-align: center;
+}
+#container_1 form{
+	padding: 1% 1% 1% 1%;
+}
+#container_1 select{
+	padding: 0.5%;
+	width: 70%;
+	float: left;
+}
+#container_1 input{
+	padding: 0.5%;
+	width: 22%;
+	float:right;
+	text-align: center;
+}
+#container_2_1{
+	padding: 1%;
+	margin: 0.5%;
+	width: 30.33333%;
+	float :left;
+	background-color: #A9DDFF;
+}
+#container_2_2{
+	padding: 1%;
+	margin: 0.5%;
+	width: 30.33333%;
+	float: left;
+	background-color: #A9DDFF;
+}
+#container_2_3{
+	padding: 1%;
+	margin: 0.5%;
+	width: 30.33333%;
+	float:right;
+	background-color: #A9DDFF;
+}

@@ -4,7 +4,7 @@ import numpy as np
 import scipy.sparse
 from sklearn.preprocessing import normalize
 
-__all__ = ['get_rwr_ranks', 'get_k_best']
+__all__ = ['get_rwr_ranks', 'get_k_best', 'get_matching_query']
 
 
 def get_rwr_ranks(W, q, c):
@@ -65,3 +65,17 @@ def get_k_best(a,k):
 			min_a = min(k_best,key=lambda item:item[0])
 
 	return k_best
+
+def get_matching_query(q):
+	"""
+	Input: 
+		q: Query entered by the user through web application.
+
+	Output:
+		index: Index, in string type, of the most matching query from the database.
+
+	Example:
+		get_matching_query('牙疼怎么办') = '1000015'
+
+	"""
+	return '1000052'

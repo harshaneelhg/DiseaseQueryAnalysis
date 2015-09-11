@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
 
 import numpy as np
 import scipy.sparse
@@ -9,6 +10,7 @@ import hashlib
 import pdb
 import sys
 import json
+import codecs
 
 __all__ = ['preprocess']
 
@@ -111,24 +113,27 @@ def preprocess():
 		idx = idx + 1
 		if idx%10000 == 0:
 			#print idx, n, line
-			x = '-'*int(idx*100.0/n) + '>' + '_'*int((idx-n)*100.0/n) + '| ' + str(int(idx*100.0/n)) + '%'
+			x = '-'*int(idx*50.0/n) + '>' + '_'*int((idx-n)*50.0/n) + '| ' + str(int(idx*100.0/n)) + '%'
 			sys.stdout.flush()
 			sys.stdout.write('%s\r' % x)
 		line = f.readline()
 	#print 'processing queries...'
-	f = open('../Data/Baidu/query_dict.txt', 'rb')
+	f = codecs.open('../Data/Baidu/query_dict.txt', 'rb')
 	line = f.readline()
 	while line!='':
-		random_str = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
+		random_str_1 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
+		random_str_2 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
+		random_str = random_str_1+random_str_2
 		key = hashlib.md5(random_str).hexdigest()
 		id_key_lookup[str(idx)] = str(key)
 		key_id_lookup[str(key)] = str(idx)
-		d = ['query',str(line).strip()]
+		#print line.strip().encode('UTF-8')
+		d = ['query',line.strip()]
 		data_dict[str(key)]= d
 		idx = idx + 1
 		if idx%10000 == 0:
 			#print idx, n
-			x = '-'*int(idx*100.0/n) + '>' + '_'*int((idx-n)*100.0/n) + '| ' + str(int(idx*100.0/n)) + '%'
+			x = '-'*int(idx*50.0/n) + '>' + '_'*int((idx-n)*50.0/n) + '| ' + str(int(idx*100.0/n)) + '%'
 			sys.stdout.flush()
 			sys.stdout.write('%s\r' % x)
 		line = f.readline()
@@ -136,15 +141,18 @@ def preprocess():
 	f = open('../Data/Baidu/disease_dict.txt', 'rb')
 	line = f.readline()
 	while line!='':
-		random_str = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
+		random_str_1 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
+		random_str_2 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
+		random_str = random_str_1+random_str_2
 		key = hashlib.md5(random_str).hexdigest()
 		id_key_lookup[str(idx)] = str(key)
 		key_id_lookup[str(key)] = str(idx)
-		d = ['disease',str(line).strip()]
+		d = ['disease',line.strip()]
+		#print d[1]
 		data_dict[str(key)]= d
 		idx = idx + 1
 		if idx%10000 == 0:
-			x = '-'*int(idx*100.0/n) + '>' + '_'*int((idx-n)*100.0/n) + '| ' + str(int(idx*100.0/n)) + '%'
+			x = '-'*int(idx*50.0/n) + '>' + '_'*int((idx-n)*50.0/n) + '| ' + str(int(idx*100.0/n)) + '%'
 			sys.stdout.flush()
 			sys.stdout.write('%s\r' % x)
 		line = f.readline()
@@ -156,6 +164,7 @@ def preprocess():
 		json.dump(key_id_lookup, outfile)
 	with open('../Data/Baidu/node_data.json', 'w') as outfile:
 		json.dump(data_dict, outfile)
+		
 preprocess()
 
 """
