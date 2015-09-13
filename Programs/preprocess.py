@@ -118,7 +118,7 @@ def preprocess():
 			sys.stdout.write('%s\r' % x)
 		line = f.readline()
 	#print 'processing queries...'
-	f = codecs.open('../Data/Baidu/query_dict.txt', 'rb')
+	f = codecs.open('../Data/Baidu/query_dict_utf.txt', 'rb')
 	line = f.readline()
 	while line!='':
 		random_str_1 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
@@ -128,7 +128,7 @@ def preprocess():
 		id_key_lookup[str(idx)] = str(key)
 		key_id_lookup[str(key)] = str(idx)
 		#print line.strip().encode('UTF-8')
-		d = ['query',line.strip()]
+		d = ['query',line]
 		data_dict[str(key)]= d
 		idx = idx + 1
 		if idx%10000 == 0:
@@ -138,7 +138,7 @@ def preprocess():
 			sys.stdout.write('%s\r' % x)
 		line = f.readline()
 	#print 'processing diseases...'
-	f = open('../Data/Baidu/disease_dict.txt', 'rb')
+	f = open('../Data/Baidu/disease_dict_utf.txt', 'rb')
 	line = f.readline()
 	while line!='':
 		random_str_1 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
@@ -147,7 +147,7 @@ def preprocess():
 		key = hashlib.md5(random_str).hexdigest()
 		id_key_lookup[str(idx)] = str(key)
 		key_id_lookup[str(key)] = str(idx)
-		d = ['disease',line.strip()]
+		d = ['disease',line]
 		#print d[1]
 		data_dict[str(key)]= d
 		idx = idx + 1
