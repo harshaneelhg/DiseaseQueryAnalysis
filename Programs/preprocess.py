@@ -118,7 +118,7 @@ def preprocess():
 			sys.stdout.write('%s\r' % x)
 		line = f.readline()
 	#print 'processing queries...'
-	f = codecs.open('../Data/Baidu/query_dict_utf.txt', 'rb')
+	f = codecs.open('../Data/Baidu/query_dict.txt', 'rb')
 	line = f.readline()
 	while line!='':
 		random_str_1 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
@@ -138,7 +138,7 @@ def preprocess():
 			sys.stdout.write('%s\r' % x)
 		line = f.readline()
 	#print 'processing diseases...'
-	f = open('../Data/Baidu/disease_dict_utf.txt', 'rb')
+	f = open('../Data/Baidu/disease_dict.txt', 'rb')
 	line = f.readline()
 	while line!='':
 		random_str_1 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
