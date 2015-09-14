@@ -121,10 +121,7 @@ def preprocess():
 	f = codecs.open('../Data/Baidu/query_dict.txt', 'rb')
 	line = f.readline()
 	while line!='':
-		random_str_1 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
-		random_str_2 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
-		random_str = random_str_1+random_str_2
-		key = hashlib.md5(random_str).hexdigest()
+		key = hashlib.md5(line.strip()).hexdigest()
 		id_key_lookup[str(idx)] = str(key)
 		key_id_lookup[str(key)] = str(idx)
 		#print line.strip().encode('UTF-8')
@@ -141,10 +138,7 @@ def preprocess():
 	f = open('../Data/Baidu/disease_dict.txt', 'rb')
 	line = f.readline()
 	while line!='':
-		random_str_1 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
-		random_str_2 = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
-		random_str = random_str_1+random_str_2
-		key = hashlib.md5(random_str).hexdigest()
+		key = hashlib.md5(line.strip()).hexdigest()
 		id_key_lookup[str(idx)] = str(key)
 		key_id_lookup[str(key)] = str(idx)
 		d = ['disease',line]

@@ -7,6 +7,7 @@ import scipy.sparse
 import sys
 import json
 import numpy as np
+import time
 from modules.modules import get_rwr_ranks, get_k_best, get_matching_query
 
 app = flask.Flask(__name__)
@@ -22,6 +23,8 @@ with open('../../Data/Baidu/node_data.json', 'rb') as infile:
 	data_dict = json.load(infile)
 with open('../../Data/Baidu/id-key.json', 'rb') as infile:
 	id_key = json.load(infile)
+with open('../../Data/Baidu/key-id.json', 'rb') as infile:
+	key_id = json.load(infile)
 
 class Home(flask.views.MethodView):
 
@@ -46,15 +49,18 @@ app.add_url_rule(
 
 @app.route('/get_ranks', methods=['GET'])
 def get_ranks():
+	start = time.time()
 	print flask.request.args
 	query = flask.request.args['search']
-	index = get_matching_query(query,id_key,data_dict)
+	index = get_matching_query(query,key_id,data_dict)
 	q = np.zeros(1716500)
 	q[int(index)] = 1.0
 	q = scipy.sparse.csc_matrix(q)
-	r1, i = get_rwr_ranks(adj, q, 0.5)
+	r1, i = get_rwr_ranks(adj, q, 0.2)
 	k_best = get_k_best(r1.data[len(r1.data)-500:],5)
+	end = time.time()
 	r = {}
+	r['t'] = str(end-start)
 	idx = 1
 	for k in k_best:
 		r[str(idx)] = [k[0], data_dict[id_key[str(1716000+k[1])]][1]]

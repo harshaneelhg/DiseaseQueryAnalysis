@@ -4,6 +4,7 @@
 import numpy as np
 import scipy.sparse
 from sklearn.preprocessing import normalize
+import hashlib
 
 __all__ = ['get_rwr_ranks', 'get_k_best', 'get_matching_query']
 
@@ -65,7 +66,7 @@ def get_k_best(a,k):
 			min_a = min(k_best,key=lambda item:item[0])
 	return k_best
 
-def get_matching_query(q,id_key,data_dict):
+def get_matching_query(q,key_id,data_dict):
 	"""
 	Input: 
 		q: Query entered by the user through web application.
@@ -77,5 +78,11 @@ def get_matching_query(q,id_key,data_dict):
 		get_matching_query('牙疼怎么办') = '1000015'
 
 	"""
-
-	return '1000001'
+	if q != '':
+		key = hashlib.md5(q.strip()).hexdigest()
+		if key in data_dict:
+			print "Key found.."
+			return str(key_id[key])
+		else:
+			print "Key not found..."
+			return '1000001'

@@ -41,38 +41,39 @@
                             data: {search:q},
                             success:function(response){
                                 console.log(response);
+                                d = JSON.parse(response);
                                 var res = document.getElementById("results");
                                 res.removeChild(document.getElementById("results_panel"));
-                                var txt_head = document.createElement('p');
-                                var p_text = document.createTextNode("结果 (Results):");
-                                txt_head.appendChild(p_text);
-                                res.appendChild(txt_head);
                                 var idiv = document.createElement('div');
                                 idiv.id = "results_panel";
                                 document.getElementById("results").appendChild(idiv);
-                                d = JSON.parse(response);
+                                var txt_head = document.createElement('p');
+                                var p_text = document.createTextNode("结果 (Results): Query Time = "+d["t"]+" seconds.");
+                                txt_head.appendChild(p_text);
+                                document.getElementById("results_panel").appendChild(txt_head);
                                 for(x in d){
-                                    var val = d[x];
-                                    var idiv = document.createElement('div');
-                                    idiv.id = x;
-                                    idiv.className = "panel panel-primary bg-info";
-                                    document.getElementById('results_panel').appendChild(idiv);
+                                    if (x!="t"){
+                                        var val = d[x];
+                                        var idiv = document.createElement('div');
+                                        idiv.id = x;
+                                        idiv.className = "panel panel-primary bg-info";
+                                        document.getElementById('results_panel').appendChild(idiv);
 
-                                    var childDiv = document.createElement('div');
-                                    childDiv.id = x + "_child";
-                                    childDiv.className = "panel-body";
-                                    document.getElementById(x).appendChild(childDiv);
+                                        var childDiv = document.createElement('div');
+                                        childDiv.id = x + "_child";
+                                        childDiv.className = "panel-body";
+                                        document.getElementById(x).appendChild(childDiv);
 
-                                    var childName = document.createElement('p');
-                                    var p_name_text = document.createTextNode("病 (Disease): "+ d[x][1]);
-                                    childName.appendChild(p_name_text);
-                                    document.getElementById(x + "_child").appendChild(childName);
+                                        var childName = document.createElement('p');
+                                        var p_name_text = document.createTextNode("病 (Disease): "+ d[x][1]);
+                                        childName.appendChild(p_name_text);
+                                        document.getElementById(x + "_child").appendChild(childName);
 
-                                    var childScore = document.createElement('p');
-                                    var p_score_text = document.createTextNode("相关评分 (Score): "+ d[x][0]);
-                                    childScore.appendChild(p_score_text);
-                                    document.getElementById(x + "_child").appendChild(childScore);
-
+                                        var childScore = document.createElement('p');
+                                        var p_score_text = document.createTextNode("相关评分 (Score): "+ d[x][0]);
+                                        childScore.appendChild(p_score_text);
+                                        document.getElementById(x + "_child").appendChild(childScore);
+                                    }
                                 }
 
                             },
