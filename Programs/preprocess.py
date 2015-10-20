@@ -11,6 +11,7 @@ import pdb
 import sys
 import json
 import codecs
+import snap
 
 __all__ = ['preprocess']
 
@@ -84,7 +85,7 @@ def preprocess():
 
 	n = n1 + n2 + n3
 	# Load overall adjecency matrix.
-	data = scipy.io.loadmat('../Data/Baidu/adj_matrix.mat')
+	data = scipy.io.loadmat('../Data/Baidu/adj_matrix_2.mat')
 	adj = data['adj_matrix']
 	save = {
 		'adjecency_matrix': adj,
@@ -93,13 +94,37 @@ def preprocess():
 		'n2': n2,
 		'n3': n3,
 		}
-	scipy.io.savemat('../Data/Baidu/data.mat', save)
+	scipy.io.savemat('../Data/Baidu/data_2.mat', save)
+
+	G = snap.TUNGraph.New()
+	for i in range(n):
+		G.AddNode(i)
+
+	f = open('../Data/Baidu/user_query.txt', 'rb')
+	line = f.readline()
+	while line!='':
+		xy = line.split(' ')
+		x = int(xy[0])
+		y = int(xy[1])+n1
+		G.AddEdge(x,y)
+		line = f.readline()
+	f = open('../Data/Baidu/query_disease.txt', 'rb')
+	line = f.readline()
+	while line!='':
+		xy = line.split(' ')
+		x = int(xy[0])+n1
+		y = int(xy[1])+n1+n2
+		G.AddEdge(x,y)
+		line = f.readline()
+
+	FOut = snap.TFOut('../Data/Baidu/connections.graph')
+	G.Save(FOut)
 
 	print 'constructing dictionary'
 	data_dict = {}
 	id_key_lookup = {}
 	key_id_lookup = {}
-	#print 'processing users...'
+	print 'processing users...'
 	#print n
 	f = open('../Data/Baidu/user_dict.txt', 'rb')
 	line = f.readline()
@@ -117,8 +142,8 @@ def preprocess():
 			sys.stdout.flush()
 			sys.stdout.write('%s\r' % x)
 		line = f.readline()
-	#print 'processing queries...'
-	f = codecs.open('../Data/Baidu/query_dict.txt', 'rb')
+	print 'processing queries...'
+	f = open('../Data/Baidu/query_dict.txt', 'rb')
 	line = f.readline()
 	while line!='':
 		key = hashlib.md5(line.strip()).hexdigest()
@@ -134,7 +159,7 @@ def preprocess():
 			sys.stdout.flush()
 			sys.stdout.write('%s\r' % x)
 		line = f.readline()
-	#print 'processing diseases...'
+	print 'processing diseases...'
 	f = open('../Data/Baidu/disease_dict.txt', 'rb')
 	line = f.readline()
 	while line!='':
@@ -158,7 +183,8 @@ def preprocess():
 		json.dump(key_id_lookup, outfile)
 	with open('../Data/Baidu/node_data.json', 'w') as outfile:
 		json.dump(data_dict, outfile)
-		
+
+
 preprocess()
 
 """

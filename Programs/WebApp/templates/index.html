@@ -1,8 +1,8 @@
         {% extends "base.html" %}
         {% block body %}
             <div class="row" style="margin:1%;">
-                <div class="col-lg-4">
-                    <div class="panel panel-primary bg-info" style="background-color: #EBEBEB; height:860px;">
+                <div class="col-lg-3">
+                    <div class="panel panel-primary bg-info" id="input_pane" style="background-color: #EBEBEB; height:860px;">
                         <div class="panel-heading">
                             <h3 class="panel-title">查询输入面板 (Query Input Panel)</h3>
                         </div>
@@ -11,14 +11,26 @@
                             <div class="form-group">
                                 <h4><label>输入查询 (Input Query):</label></h4>
                                 <input class="form-control" id="search-query" type="text" placeholder="Enter your query"><br><br>
-                                <input class="btn btn-primary form-control" type="submit" id="submit-query">
+                                <input class="btn btn-primary form-control" type="submit" id="submit-query" style="width:49%" value="Submit Query">
+                                <input class="btn btn-primary form-control" type="submit" id="submit-query" style="width:49%" value="Visualize Query">
                             </div>
-
+                            <hr>
+                            <div class="form-group">
+                                <h4><label>输入查询 (Connectivity analysis):</label></h4>
+                                <input class="form-control" id="source" type="text" placeholder="Enter source"><br><br>
+                                <input class="form-control" id="target" type="text" placeholder="Enter destination"><br><br>
+                                <input class="btn btn-primary form-control" type="submit" id="submit-connections">
+                            </div>
+                            <div class="form-group">
+                                <h4><label>输入查询 (Neighborhood analysis):</label></h4>
+                                <input class="form-control" id="node" type="text" placeholder="Enter node"><br><br>
+                                <input class="btn btn-primary form-control" type="submit" id="submit-neighbors">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="panel panel-primary bg-info" style="background-color: #EBEBEB; height:860px;">
+                <div class="col-lg-9">
+                    <div class="panel panel-primary bg-info" id="main" style="background-color: #EBEBEB; height:860px;">
                         <div class="panel-heading">
                             <h3 class="panel-title">结果面板 (Result Panel)</h3>
                         </div>
@@ -40,42 +52,124 @@
                             url: "/get_ranks",
                             data: {search:q},
                             success:function(response){
-                                console.log(response);
+                                // Parse JSON object.
                                 d = JSON.parse(response);
+
+                                // Remove previousely attached results panel.
                                 var res = document.getElementById("results");
                                 res.removeChild(document.getElementById("results_panel"));
+
+                                // Append fresh results panel.
                                 var idiv = document.createElement('div');
                                 idiv.id = "results_panel";
                                 document.getElementById("results").appendChild(idiv);
+
+                                // Give heading to results panel and mention total query time.
                                 var txt_head = document.createElement('p');
-                                var p_text = document.createTextNode("结果 (Results): Query Time = "+d["t"]+" seconds.");
+                                var p_text = document.createTextNode("结果 (Results): 查询时间 (Query Time) = "+d["t"]+" seconds.");
                                 txt_head.appendChild(p_text);
                                 document.getElementById("results_panel").appendChild(txt_head);
-                                for(x in d){
-                                    if (x!="t"){
-                                        var val = d[x];
-                                        var idiv = document.createElement('div');
-                                        idiv.id = x;
-                                        idiv.className = "panel panel-primary bg-info";
-                                        document.getElementById('results_panel').appendChild(idiv);
 
-                                        var childDiv = document.createElement('div');
-                                        childDiv.id = x + "_child";
-                                        childDiv.className = "panel-body";
-                                        document.getElementById(x).appendChild(childDiv);
+                                // Extract users.
+                                var users = d["users"]
 
-                                        var childName = document.createElement('p');
-                                        var p_name_text = document.createTextNode("病 (Disease): "+ d[x][1]);
-                                        childName.appendChild(p_name_text);
-                                        document.getElementById(x + "_child").appendChild(childName);
+                                // Create panel for users and attach it to results panel.
+                                var u_div = document.createElement('div');
+                                u_div.id = "users";
+                                u_div.style= "padding:1%";
+                                u_div.className = "panel panel-primary bg-info";
+                                document.getElementById('results_panel').appendChild(u_div);
 
-                                        var childScore = document.createElement('p');
-                                        var p_score_text = document.createTextNode("相关评分 (Score): "+ d[x][0]);
-                                        childScore.appendChild(p_score_text);
-                                        document.getElementById(x + "_child").appendChild(childScore);
-                                    }
+                                var users_head = document.createElement('h4');
+                                var users_head_name = document.createTextNode("联系最紧密的用户 (Most closely associated users): ");
+                                users_head.appendChild(users_head_name);
+                                document.getElementById("users").appendChild(users_head);
+
+                                // Process Users.
+                                for (i=0;i<users.length;i++){
+
+                                    var u_hr = document.createElement('hr');
+                                    document.getElementById("users").appendChild(u_hr);
+
+                                    var u_name = document.createElement('p');
+                                    var u_name_text = document.createTextNode("用户 (User): "+ users[i][1]);
+                                    u_name.appendChild(u_name_text);
+                                    document.getElementById("users").appendChild(u_name);
+
+                                    var u_score = document.createElement('p');
+                                    var u_score_text = document.createTextNode("相关评分 (Score): "+ users[i][0]);
+                                    u_score.appendChild(u_score_text);
+                                    document.getElementById("users").appendChild(u_score);
                                 }
 
+                                // Extract diseases.
+                                var diseases = d["diseases"]
+
+                                // Create panel for diseases and attach it to results panel.
+                                var d_div = document.createElement('div');
+                                d_div.id = "diseases";
+                                d_div.style= "padding:1%";
+                                d_div.className = "panel panel-primary bg-info";
+                                document.getElementById('results_panel').appendChild(d_div);
+
+                                var diseases_head = document.createElement('h4');
+                                var diseases_head_name = document.createTextNode("最密切相关的疾病 (Most closely associated diseases): ");
+                                diseases_head.appendChild(diseases_head_name);
+                                document.getElementById("diseases").appendChild(diseases_head);
+
+                                // Process Diseases.
+                                for (i=0;i<diseases.length;i++){
+
+                                    var d_hr = document.createElement('hr');
+                                    document.getElementById("diseases").appendChild(d_hr);
+                                    
+                                    var d_name = document.createElement('p');
+                                    var d_name_text = document.createTextNode("病 (Disease): "+ diseases[i][1]);
+                                    d_name.appendChild(d_name_text);
+                                    document.getElementById("diseases").appendChild(d_name);
+
+                                    var d_score = document.createElement('p');
+                                    var d_score_text = document.createTextNode("相关评分 (Score): "+ diseases[i][0]);
+                                    d_score.appendChild(d_score_text);
+                                    document.getElementById("diseases").appendChild(d_score);
+                                }
+
+                                // Extract queries.
+                                var queries = d["queries"]
+
+                                // Create panel for queries and attach it to results panel.
+                                var q_div = document.createElement('div');
+                                q_div.id = "queries";
+                                q_div.style= "padding:1%";
+                                q_div.className = "panel panel-primary bg-info";
+                                document.getElementById('results_panel').appendChild(q_div);
+
+                                var queries_head = document.createElement('h4');
+                                var queries_head_name = document.createTextNode("最密切相关的查询 (Most closely associated queries): ");
+                                queries_head.appendChild(queries_head_name);
+                                document.getElementById("queries").appendChild(queries_head);
+
+                                // Process Diseases.
+                                for (i=0;i<queries.length;i++){
+
+                                    var q_hr = document.createElement('hr');
+                                    document.getElementById("queries").appendChild(q_hr);
+                                    
+                                    var q_name = document.createElement('p');
+                                    var q_name_text = document.createTextNode("查询 (Queries): "+ queries[i][1]);
+                                    q_name.appendChild(q_name_text);
+                                    document.getElementById("queries").appendChild(q_name);
+
+                                    var q_score = document.createElement('p');
+                                    var q_score_text = document.createTextNode("相关评分 (Score): "+ queries[i][0]);
+                                    q_score.appendChild(q_score_text);
+                                    document.getElementById("queries").appendChild(q_score);
+                                }
+                                
+                                h1 = document.getElementById("diseases").clientHeight;
+                                h2 = document.getElementById("users").clientHeight;
+                                h3 = document.getElementById("queries").clientHeight;
+                                document.getElementById("main").style.height= (h1+h2+h3+150)+"px";
                             },
                             error:function(error){
                                 console.log(error);
@@ -83,6 +177,131 @@
                         });
                     });
                 });
+                $(function(){
+                    $('#submit-connections').click(function(){
+                        var src = $('#source').val();
+                        var tgt = $('#target').val();
+                        $.ajax({
+                            url:'/get_path',
+                            data:{source:src,target:tgt},
+                            success:function(response){
+                                data = JSON.parse(response);
+                                var res = document.getElementById("results");
+                                res.removeChild(document.getElementById("results_panel"));
+                                var idiv = document.createElement('div');
+                                idiv.id = "results_panel";
+                                document.getElementById("results").appendChild(idiv);
+                                visualize(data['data']);
+                            },
+                            error:function(error){
+                                console.log(error);
+                            }
+                        });
+                    });
+                });
+                $(function(){
+                    $('#submit-neighbors').click(function(){
+                        var node = $('#node').val();
+                        $.ajax({
+                            url:'/get_neighbors',
+                            data:{node:node},
+                            success:function(response){
+                                data = JSON.parse(response);
+                                var res = document.getElementById("results");
+                                res.removeChild(document.getElementById("results_panel"));
+                                var idiv = document.createElement('div');
+                                idiv.id = "results_panel";
+                                document.getElementById("results").appendChild(idiv);
+                                visualize(data['data']);
+                            },
+                            error:function(error){
+                                console.log(error);
+                            }
+                        });
+                    });
+                });
+                function visualize(links){
+                    var nodes = {};
+
+                    // Compute the distinct nodes from the links.
+                    links.forEach(function(link) {
+                    link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
+                    link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
+                    });
+
+
+                    var width = document.getElementById('results').clientWidth,
+                      height = document.getElementById('input_pane').clientHeight;
+
+                    var force = d3.layout.force()
+                      .nodes(d3.values(nodes))
+                      .links(links)
+                      .size([width, height])
+                      .linkDistance(150)
+                      .charge(function(d){
+                        return -1000;
+                      })
+                      .on("tick", tick)
+                      .start();
+
+                    var svg = d3.select("#results_panel").append("svg")
+                      .attr("width", width)
+                      .attr("height", height);
+
+                    var link = svg.selectAll(".link")
+                      .data(force.links())
+                    .enter().append("line")
+                      .attr("class", "link");
+
+                    var node = svg.selectAll(".node")
+                      .data(force.nodes())
+                    .enter().append("g")
+                      .attr("id", function(d){
+                        var node_name = String(d.name);
+                        if(node_name.indexOf('user')>-1)
+                            return "user-node"
+                        else if(node_name.indexOf('query')>-1)
+                            return "query-node"
+                        else if(node_name.indexOf('disease')>-1)
+                            return "disease-node"
+
+                      })
+                      .attr("class", "node")
+                      .on("mouseover", mouseover)
+                      .on("mouseout", mouseout)
+                      .call(force.drag);
+
+                    node.append("circle")
+                      .attr("r", 8);
+
+                    node.append("text")
+                      .attr("x", 12)
+                      .attr("dy", ".35em")
+                      .text(function(d) { return d.name; });
+
+                    function tick() {
+                    link
+                        .attr("x1", function(d) { return d.source.x; })
+                        .attr("y1", function(d) { return d.source.y; })
+                        .attr("x2", function(d) { return d.target.x; })
+                        .attr("y2", function(d) { return d.target.y; });
+
+                    node
+                        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+                    }
+
+                    function mouseover() {
+                    d3.select(this).select("circle").transition()
+                        .duration(750)
+                        .attr("r", 16);
+                    }
+
+                    function mouseout() {
+                    d3.select(this).select("circle").transition()
+                        .duration(750)
+                        .attr("r", 8);
+                    }
+                }
             </script>
             {% with messages = get_flashed_messages() %}
                 {% for message in messages %}

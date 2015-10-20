@@ -6,7 +6,7 @@ import scipy.sparse
 from sklearn.preprocessing import normalize
 import hashlib
 
-__all__ = ['get_rwr_ranks', 'get_k_best', 'get_matching_query']
+__all__ = ['get_rwr_ranks', 'get_k_best', 'get_matching_query', 'get_matching_node']
 
 
 def get_rwr_ranks(W, q, c):
@@ -86,3 +86,26 @@ def get_matching_query(q,key_id,data_dict):
 		else:
 			print "Key not found..."
 			return '1000001'
+
+def get_matching_node(n,key_id,data_dict):
+	"""
+	Input: 
+		q: Query entered by the user through web application.
+
+	Output:
+		index: Index, in string type, of the most matching query from the database.
+
+	Example:
+		get_matching_query('牙疼怎么办') = '1000015'
+
+	"""
+	if n != '':
+		key = hashlib.md5(n.strip()).hexdigest()
+		if key in data_dict:
+			print "Key found.."
+			return str(key_id[key])
+		else:
+			print "Key not found..."
+			return '1000001'
+	else:
+		return '0'

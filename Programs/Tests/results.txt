@@ -1,0 +1,261 @@
+Reading data...
+Calclating precision and recall by hiding 20.000000 percent edges
+	Set 1 :
+	-------------------------------------------------->| 100%
+	Precision = 0.519801980198, Recall = 0.0834433443344
+	Set 2 :
+	-------------------------------------------------->| 100%
+	Precision = 0.445544554455, Recall = 0.0748899889989
+	Set 3 :
+	-------------------------------------------------->| 100%
+	Precision = 0.50495049505, Recall = 0.0841859185919
+	Set 4 :
+	-------------------------------------------------->| 100%
+	Precision = 0.475247524752, Recall = 0.0773338048091
+	Set 5 :
+	-------------------------------------------------->| 100%
+	Precision = 0.44801980198, Recall = 0.075018128922
+Average precision = 47.871287 percent
+Average recall = 7.897424 percent
+Calclating precision and recall by hiding 33.000000 percent edges
+	Set 1 :
+	-------------------------------------------------->| 100%
+	Precision = 0.485148514851, Recall = 0.0818010372466
+	Set 2 :
+	-------------------------------------------------->| 100%
+	Precision = 0.39603960396, Recall = 0.0688629577243
+	Set 3 :
+	-------------------------------------------------->| 100%
+	Precision = 0.490099009901, Recall = 0.0825275539976
+	Set 4 :
+	-------------------------------------------------->| 100%
+	Precision = 0.415841584158, Recall = 0.067939651108
+	Set 5 :
+	-------------------------------------------------->| 100%
+	Precision = 0.405940594059, Recall = 0.066303850882
+Average precision = 43.861386 percent
+Average recall = 7.348701 percent
+Calclating precision and recall by hiding 40.000000 percent edges
+	Set 1 :
+	-------------------------------------------------->| 100%
+	Precision = 0.448844884488, Recall = 0.0738382143862
+	Set 2 :
+	-------------------------------------------------->| 100%
+	Precision = 0.467821782178, Recall = 0.0779103803237
+	Set 3 :
+	-------------------------------------------------->| 100%
+	Precision = 0.415841584158, Recall = 0.0639478233538
+	Set 4 :
+	-------------------------------------------------->| 100%
+	Precision = 0.490099009901, Recall = 0.0807496983465
+	Set 5 :
+	-------------------------------------------------->| 100%
+	Precision = 0.403465346535, Recall = 0.0671167637296
+Average precision = 44.521452 percent
+Average recall = 7.271258 percent
+Calclating precision and recall by hiding 50.000000 percent edges
+	Set 1 :
+	-------------------------------------------------->| 100%
+	Precision = 0.419141914191, Recall = 0.0668522524521
+	Set 2 :
+	-------------------------------------------------->| 100%
+	Precision = 0.419141914191, Recall = 0.0724839095205
+	Set 3 :
+	-------------------------------------------------->| 100%
+	Precision = 0.485148514851, Recall = 0.0844963067735
+	Set 4 :
+	-------------------------------------------------->| 100%
+	Precision = 0.455445544554, Recall = 0.0762140499764
+	Set 5 :
+	-------------------------------------------------->| 100%
+	Precision = 0.490099009901, Recall = 0.0842880716643
+Average precision = 45.379538 percent
+Average recall = 7.686692 percent
+Calclating precision and recall by hiding 60.000000 percent edges
+	Set 1 :
+	-------------------------------------------------->| 100%
+	Precision = 0.389438943894, Recall = 0.0620933521924
+	Set 2 :
+	-------------------------------------------------->| 100%
+	Precision = 0.455445544554, Recall = 0.0795143800094
+	Set 3 :
+	-------------------------------------------------->| 100%
+	Precision = 0.450495049505, Recall = 0.072385452831
+	Set 4 :
+	-------------------------------------------------->| 100%
+	Precision = 0.519801980198, Recall = 0.0815456545655
+	Set 5 :
+	-------------------------------------------------->| 100%
+	Precision = 0.445544554455, Recall = 0.0759304022087
+Average precision = 45.214521 percent
+Average recall = 7.429385 percent
+
+
+
+Reading data...
+Set 1 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.475247524752, Recall = 0.0765008643722
+[ 30% HIDDEEN EDGES ] Precision = 0.475247524752, Recall = 0.0765008643722
+[ 40% HIDDEEN EDGES ] Precision = 0.430693069307, Recall = 0.0955881601221
+[ 50% HIDDEEN EDGES ] Precision = 0.438943894389, Recall = 0.0958085047603
+[ 60% HIDDEEN EDGES ] Precision = 0.405940594059, Recall = 0.10345842094
+
+Set 2 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.435643564356, Recall = 0.0734912776992
+[ 30% HIDDEEN EDGES ] Precision = 0.440594059406, Recall = 0.0735247269901
+[ 40% HIDDEEN EDGES ] Precision = 0.389438943894, Recall = 0.0941123325451
+[ 50% HIDDEEN EDGES ] Precision = 0.391089108911, Recall = 0.0941492418669
+[ 60% HIDDEEN EDGES ] Precision = 0.427392739274, Recall = 0.104721529847
+
+Set 3 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.485148514851, Recall = 0.0788268112526
+[ 30% HIDDEEN EDGES ] Precision = 0.485148514851, Recall = 0.0788268112526
+[ 40% HIDDEEN EDGES ] Precision = 0.430693069307, Recall = 0.0996586737579
+[ 50% HIDDEEN EDGES ] Precision = 0.430693069307, Recall = 0.0996586737579
+[ 60% HIDDEEN EDGES ] Precision = 0.405940594059, Recall = 0.108273821298
+
+Set 4 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.519801980198, Recall = 0.0884120366924
+[ 30% HIDDEEN EDGES ] Precision = 0.518151815182, Recall = 0.0895410969668
+[ 40% HIDDEEN EDGES ] Precision = 0.482673267327, Recall = 0.100185032332
+[ 50% HIDDEEN EDGES ] Precision = 0.480198019802, Recall = 0.09724910906
+[ 60% HIDDEEN EDGES ] Precision = 0.46204620462, Recall = 0.109058686672
+
+Set 5 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.50495049505, Recall = 0.0841741316989
+[ 30% HIDDEEN EDGES ] Precision = 0.50495049505, Recall = 0.0855885588559
+[ 40% HIDDEEN EDGES ] Precision = 0.435643564356, Recall = 0.0926067562572
+[ 50% HIDDEEN EDGES ] Precision = 0.437293729373, Recall = 0.0940368992715
+[ 60% HIDDEEN EDGES ] Precision = 0.426567656766, Recall = 0.101460158345
+
+#############################################################################################################
+
+Set 1 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.456087824351, Recall = 0.0753081353381
+[ 30% HIDDEEN EDGES ] Precision = 0.455755156354, Recall = 0.0759693607927
+[ 40% HIDDEEN EDGES ] Precision = 0.450432468397, Recall = 0.101983171777
+[ 50% HIDDEEN EDGES ] Precision = 0.451796407186, Recall = 0.103648240402
+[ 60% HIDDEEN EDGES ] Precision = 0.43376580173, Recall = 0.116604069892
+
+Set 2 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.426147704591, Recall = 0.0716570770821
+[ 30% HIDDEEN EDGES ] Precision = 0.427145708583, Recall = 0.071842268516
+[ 40% HIDDEEN EDGES ] Precision = 0.433216899534, Recall = 0.0970737223393
+[ 50% HIDDEEN EDGES ] Precision = 0.432934131737, Recall = 0.0977612068034
+[ 60% HIDDEEN EDGES ] Precision = 0.418444064252, Recall = 0.102401576217
+
+Set 3 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.451097804391, Recall = 0.0742450386163
+[ 30% HIDDEEN EDGES ] Precision = 0.45375914837, Recall = 0.0752694411377
+[ 40% HIDDEEN EDGES ] Precision = 0.450831669993, Recall = 0.0968741495197
+[ 50% HIDDEEN EDGES ] Precision = 0.451497005988, Recall = 0.0969093432768
+[ 60% HIDDEEN EDGES ] Precision = 0.432810569338, Recall = 0.102381153042
+
+Set 4 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.483033932136, Recall = 0.0810598427416
+[ 30% HIDDEEN EDGES ] Precision = 0.483033932136, Recall = 0.0812690248319
+[ 40% HIDDEEN EDGES ] Precision = 0.473353293413, Recall = 0.110576523255
+[ 50% HIDDEEN EDGES ] Precision = 0.475166333999, Recall = 0.11124218253
+[ 60% HIDDEEN EDGES ] Precision = 0.450644742262, Recall = 0.120252201468
+
+Set 5 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.459081836327, Recall = 0.0755291005291
+[ 30% HIDDEEN EDGES ] Precision = 0.459747172322, Recall = 0.0759068650288
+[ 40% HIDDEEN EDGES ] Precision = 0.442115768463, Recall = 0.0947612085361
+[ 50% HIDDEEN EDGES ] Precision = 0.440419161677, Recall = 0.0940180151168
+[ 60% HIDDEEN EDGES ] Precision = 0.434331337325, Recall = 0.106959390032
+
+
+
+##############################################################################################################
+
+
+Set 1 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.447105788423, Recall = 0.0739718974749
+[ 30% HIDDEEN EDGES ] Precision = 0.448103792415, Recall = 0.0744694404007
+[ 40% HIDDEEN EDGES ] Precision = 0.426546906188, Recall = 0.0916494095762
+[ 50% HIDDEEN EDGES ] Precision = 0.426646706587, Recall = 0.0924886200031
+[ 60% HIDDEEN EDGES ] Precision = 0.417883281057, Recall = 0.104405719015
+
+Set 2 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.444111776447, Recall = 0.0744297840106
+[ 30% HIDDEEN EDGES ] Precision = 0.444444444444, Recall = 0.0747445915982
+[ 40% HIDDEEN EDGES ] Precision = 0.440518962076, Recall = 0.093146074759
+[ 50% HIDDEEN EDGES ] Precision = 0.440918163673, Recall = 0.0939034397232
+[ 60% HIDDEEN EDGES ] Precision = 0.436717042106, Recall = 0.107689081492
+
+Set 3 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.474051896208, Recall = 0.0765622021635
+[ 30% HIDDEEN EDGES ] Precision = 0.476713240186, Recall = 0.0770037713742
+[ 40% HIDDEEN EDGES ] Precision = 0.467065868263, Recall = 0.106469135035
+[ 50% HIDDEEN EDGES ] Precision = 0.468434559453, Recall = 0.107116550112
+[ 60% HIDDEEN EDGES ] Precision = 0.448519627412, Recall = 0.119093294134
+
+Set 4 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.423153692615, Recall = 0.0707146147266
+[ 30% HIDDEEN EDGES ] Precision = 0.424733865602, Recall = 0.07138030152
+[ 40% HIDDEEN EDGES ] Precision = 0.442463557733, Recall = 0.101088772877
+[ 50% HIDDEEN EDGES ] Precision = 0.442890409657, Recall = 0.101142715507
+[ 60% HIDDEEN EDGES ] Precision = 0.426704923486, Recall = 0.101613961199
+
+Set 5 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.440119760479, Recall = 0.0734422358142
+[ 30% HIDDEEN EDGES ] Precision = 0.440452428476, Recall = 0.0736485239568
+[ 40% HIDDEEN EDGES ] Precision = 0.444610778443, Recall = 0.101081601671
+[ 50% HIDDEEN EDGES ] Precision = 0.445575515635, Recall = 0.101523206059
+[ 60% HIDDEEN EDGES ] Precision = 0.439259576086, Recall = 0.115926842453
+
+Set 6 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.478043912176, Recall = 0.0784437839827
+[ 30% HIDDEEN EDGES ] Precision = 0.477711244178, Recall = 0.078270295272
+[ 40% HIDDEEN EDGES ] Precision = 0.467065868263, Recall = 0.10157125328
+[ 50% HIDDEEN EDGES ] Precision = 0.467265469062, Recall = 0.101765740847
+[ 60% HIDDEEN EDGES ] Precision = 0.43626081171, Recall = 0.109752049224
+
+Set 7 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.488023952096, Recall = 0.0801230771023
+[ 30% HIDDEEN EDGES ] Precision = 0.489021956088, Recall = 0.0804085871541
+[ 40% HIDDEEN EDGES ] Precision = 0.46380572189, Recall = 0.104764164179
+[ 50% HIDDEEN EDGES ] Precision = 0.461928523905, Recall = 0.10515521845
+[ 60% HIDDEEN EDGES ] Precision = 0.441843693565, Recall = 0.119833312106
+
+Set 8 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.444111776447, Recall = 0.0719870504302
+[ 30% HIDDEEN EDGES ] Precision = 0.446773120426, Recall = 0.072521410787
+[ 40% HIDDEEN EDGES ] Precision = 0.447937458417, Recall = 0.0940309491335
+[ 50% HIDDEEN EDGES ] Precision = 0.449650698603, Recall = 0.0934152251118
+[ 60% HIDDEEN EDGES ] Precision = 0.423763583943, Recall = 0.101122899272
+
+Set 9 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.491017964072, Recall = 0.0796874504958
+[ 30% HIDDEEN EDGES ] Precision = 0.489021956088, Recall = 0.0798059473523
+[ 40% HIDDEEN EDGES ] Precision = 0.452095808383, Recall = 0.0942620998335
+[ 50% HIDDEEN EDGES ] Precision = 0.457934131737, Recall = 0.095717796025
+[ 60% HIDDEEN EDGES ] Precision = 0.445104235972, Recall = 0.105213305769
+
+Set 10 :
+-------------------------------------------------->| 100%
+[ 20% HIDDEEN EDGES ] Precision = 0.469061876248, Recall = 0.0755259322625
+[ 30% HIDDEEN EDGES ] Precision = 0.469014352248, Recall = 0.0758391477853
+[ 40% HIDDEEN EDGES ] Precision = 0.468829008649, Recall = 0.106743251238
+[ 50% HIDDEEN EDGES ] Precision = 0.467583879859, Recall = 0.106973286486
+[ 60% HIDDEEN EDGES ] Precision = 0.439254823686, Recall = 0.111068074174

@@ -14,6 +14,56 @@
         <link rel="stylesheet" type="text/css" href="static/css/jquery-ui-1.10.0.custom.css"/>
         <link rel="stylesheet" type="text/css" href="static/css/jquery-ui.structure.min.css"/>
         <link rel="stylesheet" type="text/css" href="static/css/jquery-ui.theme.min.css"/>
+
+        <style>
+
+    /*.node circle {
+      fill: #fff;
+      stroke: steelblue;
+      stroke-width: 3px;
+    }*/
+
+    .node#disease-node circle {
+      fill: #FF9933;
+      stroke: steelblue;
+      stroke-width: 3px;
+    }
+
+    .node#user-node circle {
+      fill: #99FF66;
+      stroke: steelblue;
+      stroke-width: 3px;
+    }
+
+    .node#query-node circle {
+      fill: #FFFF66;
+      stroke: steelblue;
+      stroke-width: 3px;
+    }
+    .selected#disease-node circle{
+      stroke: tomato;
+    }
+    .selected#user-node circle{
+      stroke: tomato;
+    }
+    .selected#query-node circle{
+      stroke: tomato;
+    }
+
+    .node text { font: 12px sans-serif; }
+
+    .link {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 2px;
+    }
+    .ui-autocomplete {
+      max-height: 500px;
+      overflow-y: auto;
+      overflow-x: auto;
+    }
+
+    </style>
     </head>
     <body style="background-color: #D2D2D2;">
         <div>
