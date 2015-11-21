@@ -34,6 +34,7 @@ with open('../../Data/Baidu/key-id.json', 'rb') as infile:
 n1 = 1000000
 n2 = 716000
 el = []
+
 G = snap.TUNGraph.New()
 for i in range(adj.shape[0]):
 	G.AddNode(i)
@@ -187,5 +188,26 @@ def get_neighbors():
 	r = {'data':l}
 	return json.dumps(r)
 
+@app.route('/get_connections', methods=['GET'])
+def get_connections():
+	x = [1000000, 1000100, 1716100, 1000500, 1716227]
+	G_temp = nx.Graph()
+	paths = {}
+	for i in x:
+		for j in x:
+			if i!=j:
+				path = nx.shortest_path(G1,i,j)
+				G_temp.add_edge(i,j,weight=len(path))
+				paths[str(i)+','+str(j)] = path
+				paths[str(j)+','+str(i)] = path[::-1]
+	tree = nx.minimum_spanning_tree(G_temp)
+	G_temp = nx.Graph()
+	for e in tree.edges():
+		G_temp.add_path(paths[str(e[0])+','+str(e[1])])
+	links = get_links(G_temp,'path')
+	selected = [data_dict[str(id_key[str(ele)])][1] for ele in x]
+	r = {'data':links, 'selected': selected}
+	return json.dumps(r)
+
 app.debug = True
-app.run(port=8088)
+app.run(port=8086)

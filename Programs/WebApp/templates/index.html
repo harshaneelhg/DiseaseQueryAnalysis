@@ -12,19 +12,23 @@
                                 <h4><label>输入查询 (Input Query):</label></h4>
                                 <input class="form-control" id="search-query" type="text" placeholder="Enter your query"><br><br>
                                 <input class="btn btn-primary form-control" type="submit" id="submit-query" style="width:49%" value="Submit Query">
-                                <input class="btn btn-primary form-control" type="submit" id="submit-query" style="width:49%" value="Visualize Query">
+                                <input class="btn btn-primary form-control" type="submit" id="submit-viz-query" style="width:49%" value="Visualize Query">
                             </div>
-                            <hr>
                             <div class="form-group">
-                                <h4><label>输入查询 (Connectivity analysis):</label></h4>
+                                <h4><label>连通性分析 (Connectivity analysis):</label></h4>
                                 <input class="form-control" id="source" type="text" placeholder="Enter source"><br><br>
                                 <input class="form-control" id="target" type="text" placeholder="Enter destination"><br><br>
                                 <input class="btn btn-primary form-control" type="submit" id="submit-connections">
                             </div>
                             <div class="form-group">
-                                <h4><label>输入查询 (Neighborhood analysis):</label></h4>
+                                <h4><label>邻居分析 (Neighborhood analysis):</label></h4>
                                 <input class="form-control" id="node" type="text" placeholder="Enter node"><br><br>
                                 <input class="btn btn-primary form-control" type="submit" id="submit-neighbors">
+                            </div>
+                            <div class="form-group">
+                                <h4><label>斯坦纳树分析 (Steiner tree analysis):</label></h4>
+                                <input class="form-control" id="node" type="textarea" placeholder="Enter nodes"><br>
+                                <input class="btn btn-primary form-control" type="submit" id="submit-steiner">
                             </div>
                         </div>
                     </div>
@@ -191,7 +195,7 @@
                                 var idiv = document.createElement('div');
                                 idiv.id = "results_panel";
                                 document.getElementById("results").appendChild(idiv);
-                                visualize(data['data']);
+                                visualize(data['data'],null);
                             },
                             error:function(error){
                                 console.log(error);
@@ -212,7 +216,7 @@
                                 var idiv = document.createElement('div');
                                 idiv.id = "results_panel";
                                 document.getElementById("results").appendChild(idiv);
-                                visualize(data['data']);
+                                visualize(data['data'],null);
                             },
                             error:function(error){
                                 console.log(error);
@@ -220,8 +224,67 @@
                         });
                     });
                 });
-                function visualize(links){
+                $(function(){
+                    $('#submit-viz-query').click(function(){
+                        var q = $("#search-query").val();
+                        $.ajax({
+                            url: "/get_ranks",
+                            data: {search:q},
+                            success:function(response){
+                                var d = JSON.parse(response);
+                                var link_list = [];
+                                var diseases = d['diseases'].sort(Comparator);
+                                for (i=0; i<diseases.length;i++){
+                                    link_list.push({source:q,target:diseases[i][1]+" (disease "+(i+1)+")"});
+                                }
+                                var users = d['users'].sort(Comparator);
+                                for (i=0; i<users.length;i++){
+                                    link_list.push({source:q,target:users[i][1]+" (user "+(i+1)+")"});
+                                }
+                                var queries = d['queries'].sort(Comparator);
+                                for (i=0; i<queries.length;i++){
+                                    link_list.push({source:q,target:queries[i][1]+" (query "+(i+1)+")"});
+                                }
+                                var res = document.getElementById("results");
+                                res.removeChild(document.getElementById("results_panel"));
+                                var idiv = document.createElement('div');
+                                idiv.id = "results_panel";
+                                document.getElementById("results").appendChild(idiv);
+                                visualize(link_list,null);
+                            },
+                            error:function(error){
+                                console.log(error);
+                            }
+                        });
+                    });
+                });
+                $(function(){
+                    $('#submit-steiner').click(function(){
+                        var src = $('#source').val();
+                        var tgt = $('#target').val();
+                        $.ajax({
+                            url:'/get_connections',
+                            data:{},
+                            success:function(response){
+                                data = JSON.parse(response);
+                                var res = document.getElementById("results");
+                                res.removeChild(document.getElementById("results_panel"));
+                                var idiv = document.createElement('div');
+                                idiv.id = "results_panel";
+                                document.getElementById("results").appendChild(idiv);
+                                visualize(data['data'], data['selected']);
+                            },
+                            error:function(error){
+                                console.log(error);
+                            }
+                        });
+                    });
+                });
+                function visualize(links, selected){
                     var nodes = {};
+                    if(selected == null){
+                        selected = [];
+                    }
 
                     // Compute the distinct nodes from the links.
                     links.forEach(function(link) {
@@ -266,7 +329,16 @@
                             return "disease-node"
 
                       })
-                      .attr("class", "node")
+                      .attr("class", function(d){
+                        var node_name = String(d.name);
+                        for(i=0; i<selected.length;i++){
+                            if(node_name.indexOf(selected[i])>-1)
+                                return "node selected";
+                        }
+
+                        return "node";
+
+                      })
                       .on("mouseover", mouseover)
                       .on("mouseout", mouseout)
                       .call(force.drag);
@@ -301,6 +373,11 @@
                         .duration(750)
                         .attr("r", 8);
                     }
+                }
+                function Comparator(a,b){
+                    if(a[0]<b[0]) return -1;
+                    if(a[0]>b[0]) return 1;
+                    return 0;
                 }
             </script>
             {% with messages = get_flashed_messages() %}

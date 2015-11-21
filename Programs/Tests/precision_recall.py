@@ -112,6 +112,7 @@ def get_precision_recall(adj):
 			last_index = 500 - min([i for i in range(len(sorted_ranks)) if sorted_ranks[i][1] in truth])
 			width = last_index
 			sorted_ranks = sorted_ranks[::-1]
+			k_best = get_k_best(sorted_ranks)
 			k_idx = [j for i,j in k_best]
 			precision = 0
 			for k in k_idx:

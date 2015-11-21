@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pdb
 
+"""
 '''
 pr = [
 		[0.447105788423, 0.444111776447, 0.474051896208, 0.423153692615, 0.478043912176, 0.488023952096, 0.488023952096, 0.444111776447, 0.491017964072, 0.469061876248],
@@ -45,30 +46,64 @@ rec = [
 		[ 0.1080167237420, 0.0934782551635, 0.0979383702619, 0.1178853267080, 0.1083994984640, 0.1035118834660, 0.0951123059588, 0.1026117628670, 0.0905649619624, 0.1307970758960 ],
 		[ 0.1079937248830, 0.0933042068792, 0.0980459266528, 0.1181121622070, 0.1083994984640, 0.1035118834660, 0.0952499175710, 0.1021181908490, 0.0906652414570, 0.1307970758960 ]
 	  ]
+"""
+
+pr = [
+		[0.5119,0.5119,0.5109,0.5109,0.5109,0.5109,0.5109,0.5099,0.5099],
+		[0.5059,0.5059,0.5059,0.5059,0.5059,0.5059,0.5059,0.5059,0.5059],
+		[0.5059,0.5059,0.5059,0.5059,0.5059,0.5059,0.5059,0.5059,0.5059],
+		[0.5139,0.5139,0.5139,0.5139,0.5139,0.5139,0.5139,0.5139,0.5139]
+		]
+
+rec = [
+		[0.9424,0.9422,0.9389,0.9389,0.9364,0.9364,0.9347,0.9343,0.9322],
+		[0.9545,0.9545,0.9533,0.9533,0.9533,0.9533,0.9516,0.9516,0.9488],
+		[0.9565,0.9565,0.9549,0.9549,0.9532,0.9532,0.9490,0.9490,0.9474],
+		[0.9636,0.9636,0.9610,0.9610,0.9592,0.9592,0.9571,0.9571,0.9543]
+		]
 
 p = [20,30,40,50,60,70,80,90,100]
 
 err_1 = []
 err_2 = []
 
-for i in range(0, len(pr)):
-	e = max(pr[i]) - min(pr[i])
+for i in range(0, len(p)):
+	e = max([x[i] for x in pr]) - min([x[i] for x in pr])
 	err_1.append(e/2.0)
 
-for i in range(0, len(rec)):
-	e = max(rec[i]) - min(rec[i])
+for i in range(0, len(p)):
+	e = max([x[i] for x in rec]) - min([x[i] for x in rec])
 	err_2.append(e/2.0)
 
 #pdb.set_trace()
 
-plt.errorbar(p, [np.mean(pre) for pre in pr],xerr=None, yerr=err_1, color = 'b')
+pr_plt = []
+for i in range(len(p)):
+	s = 0.0
+	for j in range(len(pr)):
+		s+= pr[j][i]
+	pr_plt.append(s/4.0)
+
+rec_plt = []
+for i in range(len(p)):
+	s = 0.0
+	for j in range(len(rec)):
+		s+= rec[j][i]
+	rec_plt.append(s/4.0)
+
+print pr_plt
+print rec_plt
+
+#plt.errorbar(p, pr_plt,xerr=None, yerr=err_1, color = 'b')
+plt.plot(p, pr_plt, color = 'b')
 plt.xlabel('Percentage edge hiding')
 plt.ylabel('Precision')
 plt.title('Precision v/s edge hiding')
 plt.show()
 
 pdb.set_trace()
-plt.errorbar(p, [np.mean(r) for r in rec], xerr=None, yerr=err_2, color = 'r')
+#plt.errorbar(p, rec_plt, xerr=None, yerr=err_2, color = 'r')
+plt.plot(p, rec_plt, color = 'r')
 plt.xlabel('Percentage edge hiding')
 plt.ylabel('Recall')
 plt.title('Recall v/s edge hiding')
@@ -76,13 +111,13 @@ plt.show()
 
 fig, ax1 = plt.subplots()
 fig.suptitle('Precision and recall with edge hiding')
-ax1.errorbar(p, [np.mean(pre) for pre in pr], yerr=err_1)
+ax1.plot(p, pr_plt)
 ax1.set_xlabel('Percentage edge hiding')
 ax1.set_ylabel('Precision', color='b')
 ax1.set_label("Precision Plot")
 
 ax2 = ax1.twinx()
-ax2.errorbar(p, [np.mean(r) for r in rec], yerr=err_2,color = 'r')
+ax2.plot(p, rec_plt, color = 'r')
 ax2.set_ylabel('Recall', color = 'r')
 ax1.set_label("Recall Plot")
 plt.show()
